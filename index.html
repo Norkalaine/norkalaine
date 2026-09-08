@@ -1,1 +1,61 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Norkalaine</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000000;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button#norkalaine-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
+  h1 {
+    color: #ffffff;
+    font-family: Impact, "Arial Narrow Bold", "Haettenschweiler", sans-serif;
+    font-size: clamp(3rem, 12vw, 10rem);
+    letter-spacing: 0.02em;
+    text-align: center;
+    margin: 0;
+    padding: 0 1rem;
+    transition: color 0.3s ease;
+    user-select: none;
+  }
+  h1.red {
+    color: #ff0000;
+  }
+</style>
+</head>
+<body>
+  <button id="norkalaine-btn" aria-label="Norkalaine">
+    <h1 id="norkalaine-text">Norkalaine</h1>
+  </button>
+
+  <script>
+    let clickCount = 0;
+    const btn = document.getElementById('norkalaine-btn');
+    const text = document.getElementById('norkalaine-text');
+
+    btn.addEventListener('click', () => {
+      clickCount++;
+      if (clickCount >= 10) {
+        text.classList.toggle('red');
+        clickCount = 0;
+      }
+    });
+  </script>
+</body>
+</html>
