@@ -1,5 +1,6 @@
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('sound-toggle');
+const soundIcon = document.getElementById('sound-icon');
 const volumeSlider = document.getElementById('volume-slider');
 const enterBtn = document.getElementById('enter-btn');
 const entryScreen = document.getElementById('entry-screen');
@@ -26,7 +27,7 @@ function fadeAudioIn(duration = FADE_MS) {
 
 function updateButton() {
   const playing = !music.paused && music.volume > 0;
-  toggleBtn.textContent = playing ? '🔊' : '🔇';
+  soundIcon.src = playing ? 'assets/unmuted.png' : 'assets/muted.png';
   toggleBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
 }
 
