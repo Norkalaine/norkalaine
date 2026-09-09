@@ -1,10 +1,11 @@
 const music = document.getElementById('bg-music');
 const toggleBtn = document.getElementById('sound-toggle');
+const volumeSlider = document.getElementById('volume-slider');
 const enterBtn = document.getElementById('enter-btn');
 const entryScreen = document.getElementById('entry-screen');
 const bgVideo = document.getElementById('bg-video');
 
-const TARGET_VOLUME = 0.5;
+let targetVolume = volumeSlider.value / 100;
 const FADE_MS = 1400;
 
 function fadeAudioIn(duration = FADE_MS) {
@@ -15,7 +16,7 @@ function fadeAudioIn(duration = FADE_MS) {
   let i = 0;
   const interval = setInterval(() => {
     i++;
-    music.volume = Math.min(TARGET_VOLUME, (TARGET_VOLUME * i) / steps);
+    music.volume = Math.min(targetVolume, (targetVolume * i) / steps);
     if (i >= steps) {
       clearInterval(interval);
       updateButton();
@@ -24,17 +25,14 @@ function fadeAudioIn(duration = FADE_MS) {
 }
 
 function updateButton() {
-  const playing = !music.paused;
+  const playing = !music.paused && music.volume > 0;
   toggleBtn.textContent = playing ? '🔊' : '🔇';
   toggleBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
 }
 
 enterBtn.addEventListener('click', () => {
-  // Unblur the video
   bgVideo.classList.add('entered');
-  // Fade out the entry overlay
   entryScreen.classList.add('fade-out');
-  // Fade the music in
   fadeAudioIn();
 
   entryScreen.addEventListener('transitionend', () => {
@@ -44,12 +42,22 @@ enterBtn.addEventListener('click', () => {
 
 toggleBtn.addEventListener('click', (e) => {
   e.stopPropagation();
-  if (music.paused) {
+  if (music.paused || music.volume === 0) {
     music.play();
-    // Snap to target volume if resuming after an explicit mute.
-    music.volume = TARGET_VOLUME;
+    music.volume = targetVolume > 0 ? targetVolume : 0.5;
+    volumeSlider.value = Math.round(music.volume * 100);
   } else {
     music.pause();
+  }
+  updateButton();
+});
+
+volumeSlider.addEventListener('input', () => {
+  targetVolume = volumeSlider.value / 100;
+  music.volume = targetVolume;
+  if (targetVolume > 0 && music.paused && entryScreen.parentNode === null) {
+    // Entry already happened; unmuting via slider should resume playback.
+    music.play();
   }
   updateButton();
 });
