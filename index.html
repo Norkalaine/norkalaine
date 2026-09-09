@@ -7,8 +7,20 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <video class="bg-video" autoplay muted loop playsinline>
+  <video id="bg-video" class="bg-video" autoplay muted loop playsinline>
     <source src="assets/background.webm" type="video/webm">
   </video>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="assets/background_music.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="entry-screen">
+    <button id="enter-btn">Enter</button>
+  </div>
+
+  <button id="sound-toggle" aria-label="Toggle sound" aria-pressed="false">🔇</button>
+
+  <script src="script.js"></script>
 </body>
 </html>
