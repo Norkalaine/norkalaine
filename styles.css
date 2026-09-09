@@ -92,13 +92,18 @@ html, body {
   border-radius: 50%;
   border: none;
   background: transparent;
-  color: #fff;
-  font-size: 1.05rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease;
+  padding: 0;
+}
+
+#sound-toggle img {
+  width: 1.4rem;
+  height: 1.4rem;
+  display: block;
 }
 
 #sound-toggle:hover {
