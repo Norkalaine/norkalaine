@@ -20,21 +20,20 @@ function fadeAudioIn(duration = FADE_MS) {
     music.volume = Math.min(targetVolume, (targetVolume * i) / steps);
     if (i >= steps) {
       clearInterval(interval);
-      updateButton();
     }
   }, stepTime);
 }
 
-function updateButton() {
-  const playing = !music.paused && music.volume > 0;
-  soundIcon.src = playing ? 'assets/unmuted.png' : 'assets/muted.png';
-  toggleBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+function setIcon(muted) {
+  soundIcon.src = muted ? 'assets/muted.png' : 'assets/unmuted.png';
+  toggleBtn.setAttribute('aria-pressed', muted ? 'false' : 'true');
 }
 
 enterBtn.addEventListener('click', () => {
   bgVideo.classList.add('entered');
   entryScreen.classList.add('fade-out');
   fadeAudioIn();
+  // Icon intentionally untouched here — stays on whatever it was showing.
 
   entryScreen.addEventListener('transitionend', () => {
     entryScreen.remove();
@@ -47,10 +46,11 @@ toggleBtn.addEventListener('click', (e) => {
     music.play();
     music.volume = targetVolume > 0 ? targetVolume : 0.5;
     volumeSlider.value = Math.round(music.volume * 100);
+    setIcon(false);
   } else {
     music.pause();
+    setIcon(true);
   }
-  updateButton();
 });
 
 volumeSlider.addEventListener('input', () => {
@@ -60,8 +60,5 @@ volumeSlider.addEventListener('input', () => {
     // Entry already happened; unmuting via slider should resume playback.
     music.play();
   }
-  updateButton();
+  setIcon(targetVolume === 0);
 });
-
-music.addEventListener('play', updateButton);
-music.addEventListener('pause', updateButton);
