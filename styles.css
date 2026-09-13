@@ -44,26 +44,27 @@ html, body {
 }
 
 #enter-btn {
-  padding: 1.1rem 3rem;
-  font-size: 1.15rem;
-  letter-spacing: 0.05em;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 999px;
+  padding: 0;
+  border: none;
+  background: transparent;
   cursor: pointer;
-  backdrop-filter: blur(6px);
-  transition: background 0.25s ease, transform 0.25s ease;
+  transition: transform 0.25s ease;
+}
+
+#enter-btn img {
+  display: block;
+  width: 380px;
+  max-width: 80vw;
+  height: auto;
 }
 
 #enter-btn:hover {
-  background: rgba(255, 255, 255, 0.18);
   transform: scale(1.04);
 }
 
 #enter-btn:focus-visible {
   outline: 2px solid #fff;
-  outline-offset: 3px;
+  outline-offset: 6px;
 }
 
 #audio-controls {
