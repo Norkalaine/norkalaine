@@ -5,6 +5,7 @@ const volumeSlider = document.getElementById('volume-slider');
 const enterBtn = document.getElementById('enter-btn');
 const entryScreen = document.getElementById('entry-screen');
 const bgVideo = document.getElementById('bg-video');
+const siteLogo = document.getElementById('site-logo');
 
 let targetVolume = volumeSlider.value / 100;
 
@@ -23,6 +24,7 @@ enterBtn.addEventListener('click', () => {
   entryScreen.classList.add('fade-out');
   enterBtn.classList.add('pop');
   startAudio();
+  siteLogo.classList.add('visible');
   // Icon intentionally untouched here — stays on whatever it was showing.
 
   entryScreen.addEventListener('transitionend', () => {
