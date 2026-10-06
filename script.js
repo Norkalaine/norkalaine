@@ -21,6 +21,7 @@ function setIcon(muted) {
 enterBtn.addEventListener('click', () => {
   bgVideo.classList.add('entered');
   entryScreen.classList.add('fade-out');
+  enterBtn.classList.add('pop');
   startAudio();
   // Icon intentionally untouched here — stays on whatever it was showing.
 
