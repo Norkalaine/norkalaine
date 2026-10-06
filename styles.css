@@ -7,6 +7,7 @@ html, body {
   background: #000;
 }
 
+
 .bg-video {
   position: fixed;
   inset: 0;
@@ -90,7 +91,7 @@ html, body {
   top: 1.25rem;
   left: 1.25rem;
   z-index: 10;
-  width: 90px;
+  width: 135px;
   height: auto;
   opacity: 0;
   pointer-events: none;
