@@ -88,8 +88,8 @@ html, body {
 
 #site-logo {
   position: fixed;
-  top: 1.25rem;
-  left: 1.25rem;
+  top: 0.4rem;
+  left: 0.4rem;
   z-index: 10;
   width: 135px;
   height: auto;
