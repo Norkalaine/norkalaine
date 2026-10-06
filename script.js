@@ -7,21 +7,10 @@ const entryScreen = document.getElementById('entry-screen');
 const bgVideo = document.getElementById('bg-video');
 
 let targetVolume = volumeSlider.value / 100;
-const FADE_MS = 1400;
 
-function fadeAudioIn(duration = FADE_MS) {
-  music.volume = 0;
+function startAudio() {
+  music.volume = targetVolume;
   music.play().catch(() => {});
-  const steps = 30;
-  const stepTime = duration / steps;
-  let i = 0;
-  const interval = setInterval(() => {
-    i++;
-    music.volume = Math.min(targetVolume, (targetVolume * i) / steps);
-    if (i >= steps) {
-      clearInterval(interval);
-    }
-  }, stepTime);
 }
 
 function setIcon(muted) {
@@ -32,7 +21,7 @@ function setIcon(muted) {
 enterBtn.addEventListener('click', () => {
   bgVideo.classList.add('entered');
   entryScreen.classList.add('fade-out');
-  fadeAudioIn();
+  startAudio();
   // Icon intentionally untouched here — stays on whatever it was showing.
 
   entryScreen.addEventListener('transitionend', () => {
